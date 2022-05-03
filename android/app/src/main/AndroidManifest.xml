@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.testbook">
+        <uses-permission android:name="android.permission.INTERNET" />  
    <application
-        android:label="testbook"
+        android:label="ТЕОРЕТИЧЕСКИЕ ОСНОВЫ ОТДЕЛКИ ВОЛОКНИСТЫХ МАТЕРИАЛОВ"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

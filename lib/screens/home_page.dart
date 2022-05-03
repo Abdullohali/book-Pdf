@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testbook/core/components/mundarija.dart';
+import 'package:testbook/cubit/cubit/color_cubit.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.pdfAssetPath}) : super(key: key);
@@ -21,11 +24,17 @@ class _MyHomePageState extends State<MyHomePage> {
       StreamController<String>();
 
   ScrollController _controller = ScrollController();
-
+  final Completer<PDFViewController> _controllerr =
+      Completer<PDFViewController>();
+  int? pages = 0;
+  int? currentPage = 0;
+  bool isReady = false;
+  String errorMessage = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         toolbarHeight: 50.h,
         title: RichText(
           text: const TextSpan(text: """
@@ -48,7 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   AsyncSnapshot<PDFViewController> snapshot) {
                                 if (snapshot.hasData && snapshot.data != null) {
                                   return DraggableScrollbar.semicircle(
-                                    backgroundColor: Colors.green,
                                     controller: _controller,
                                     child: ListView.builder(
                                       controller: _controller,
@@ -90,9 +98,43 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) {
                         return const AlertDialog(
                           content: Text(
-                              "Bu loyiha Foziljonov Abdulloh tomonidan 2022-yilda ishlab chiqildi"),
+                            "Bu loyiha Foziljonov Abdulloh tomonidan 2022-yilda ishlab chiqildi",
+                          ),
                         );
                       });
+                } else if (e == 3) {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return BlocBuilder<ColorCubit, ColorState>(
+                        builder: (context, state) {
+                          return SizedBox(
+                            height: 400.h,
+                            child: ListView.builder(
+                              itemBuilder: (_, __) {
+                                return ListTile(
+                                  title: Text(
+                                    ranglarim[__][1].toString(),
+                                  ),
+                                  trailing: CircleAvatar(
+                                    radius: 15.r,
+                                    backgroundColor: ranglarim[__][0],
+                                  ),
+                                  onTap: () async {
+                                    context
+                                        .read<ColorCubit>()
+                                        .changeColor(ranglarim[__][0]);
+                                  },
+                                );
+                              },
+                              itemCount: ranglarim.length,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
                 }
               },
               itemBuilder: (context) => [
@@ -103,6 +145,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     const PopupMenuItem(
                       child: Text("О проекте"),
                       value: 2,
+                    ),
+                    const PopupMenuItem(
+                      child: Text("Цвета"),
+                      value: 3,
                     )
                   ])
         ],
@@ -136,6 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     FloatingActionButton(
+                        backgroundColor: Theme.of(context).primaryColor,
                         heroTag: '+',
                         child: const Text('+'),
                         onPressed: () async {
@@ -147,10 +194,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             await pdfController.setPage(currentPage);
                           }
                         }),
-                    SizedBox(
+                    Container(
                       height: 70.h,
                       width: 70.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50.r),
+                          color: Theme.of(context).primaryColor),
                       child: FloatingActionButton(
+                          backgroundColor: Theme.of(context).primaryColor,
                           heroTag: '-',
                           child: StreamBuilder<String>(
                               stream: _pageCountController.stream,
@@ -163,6 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: () async {}),
                     ),
                     FloatingActionButton(
+                        backgroundColor: Theme.of(context).primaryColor,
                         heroTag: '-',
                         child: const Text('-'),
                         onPressed: () async {
