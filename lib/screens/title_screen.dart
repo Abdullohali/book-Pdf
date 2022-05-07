@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:testbook/screens/home_page.dart';
+import 'package:testbook/screens/new_home.dart';
 
 class TitleSceen extends StatefulWidget {
   const TitleSceen({Key? key}) : super(key: key);
@@ -17,11 +17,7 @@ class _TitleSceenState extends State<TitleSceen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (_) =>  MyHomePage(
-                    pdfAssetPath: 'assets/yoll.pdf',
-                  )));
+          context, MaterialPageRoute(builder: (_) => const NewHomePage()));
     });
     // Navigator.push(context, MaterialPageRoute(builder: (_) => MainPage()));
   }

@@ -4,15 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testbook/cubit/cubit/color_cubit.dart';
 import 'package:testbook/screens/home_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:testbook/screens/new_home.dart';
 import 'package:testbook/screens/title_screen.dart';
 
 Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => ColorCubit(),
-        ),
+        BlocProvider(create: (context) => ColorCubit()),
       ],
       child: const MyApp(),
     ),
