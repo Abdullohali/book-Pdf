@@ -1,7 +1,6 @@
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:testbook/cubit/cubit/color_cubit.dart';
 
@@ -39,9 +38,9 @@ class _NewHomePageState extends State<NewHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        toolbarHeight: 50.h,
+        toolbarHeight: 50,
         backgroundColor: Theme.of(context).primaryColor,
         title: RichText(
           text: const TextSpan(text: """
@@ -59,7 +58,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       return StatefulBuilder(builder:
                           (BuildContext context, StateSetter setState) {
                         return SizedBox(
-                            height: 400.h,
+                            height: 400,
                             child: DraggableScrollbar.semicircle(
                               controller: _controller,
                               child: ListView.builder(
@@ -75,10 +74,11 @@ class _NewHomePageState extends State<NewHomePage> {
                                     trailing: Text(mundarija[__][0][0] == ' '
                                         ? ""
                                         : mundarija[__][1].toString()),
-                                    onTap: () async {
-                                      _actualPageNumber = mundarija[__][1];
-                                      if (_actualPageNumber >= 0) {}
-                                      setState((){});
+                                    onTap: () {
+                                      setState(() {
+                                        _pdfController.goToPage(
+                                            pageNumber: mundarija[__][1]);
+                                      });
                                     },
                                   );
                                 },
@@ -106,7 +106,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       return BlocBuilder<ColorCubit, ColorState>(
                         builder: (context, state) {
                           return SizedBox(
-                            height: 400.h,
+                            height: 400,
                             child: ListView.builder(
                               itemBuilder: (_, __) {
                                 return ListTile(
@@ -114,7 +114,7 @@ class _NewHomePageState extends State<NewHomePage> {
                                     ranglarim[__][1].toString(),
                                   ),
                                   trailing: CircleAvatar(
-                                    radius: 15.r,
+                                    radius: 15,
                                     backgroundColor: ranglarim[__][0],
                                   ),
                                   onTap: () async {
@@ -166,7 +166,7 @@ class _NewHomePageState extends State<NewHomePage> {
       ),
       floatingActionButton: Scrollbar(
         child: Padding(
-          padding: EdgeInsets.only(left: 30.w),
+          padding: EdgeInsets.only(left: 30),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -182,19 +182,19 @@ class _NewHomePageState extends State<NewHomePage> {
                     );
                   }),
               Container(
-                height: 70.h,
-                width: 70.w,
+                height: 70,
+                width: 70,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.r),
+                    borderRadius: BorderRadius.circular(50),
                     color: Theme.of(context).primaryColor),
                 child: FloatingActionButton(
                     backgroundColor: Theme.of(context).primaryColor,
-                    heroTag: '-',
+                    heroTag: '0',
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
                         '$_actualPageNumber/$_allPagesCount',
-                        style: TextStyle(fontSize: 12.h),
+                        style: const TextStyle(fontSize: 12),
                       ),
                     ),
                     onPressed: () async {}),

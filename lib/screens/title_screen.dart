@@ -5,8 +5,8 @@ import 'package:lottie/lottie.dart';
 import 'package:testbook/screens/new_home.dart';
 
 class TitleSceen extends StatefulWidget {
-  const TitleSceen({Key? key}) : super(key: key);
-
+  const TitleSceen({Key? key,required this.assetPath}) : super(key: key);
+  final String assetPath;
   @override
   State<TitleSceen> createState() => _TitleSceenState();
 }
@@ -27,7 +27,7 @@ class _TitleSceenState extends State<TitleSceen> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-          child: Lottie.asset("assets/json/book.json"),
+          child: Lottie.asset(widget.assetPath),
         ));
   }
 }
