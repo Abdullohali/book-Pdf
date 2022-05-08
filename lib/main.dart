@@ -14,12 +14,6 @@ Future<void> main() async {
       child: const MyApp(),
     ),
   );
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.transparent),
-  );
 }
 
 class MyApp extends StatelessWidget {

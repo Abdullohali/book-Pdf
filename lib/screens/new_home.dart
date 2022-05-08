@@ -58,7 +58,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       return StatefulBuilder(builder:
                           (BuildContext context, StateSetter setState) {
                         return SizedBox(
-                            height: 400,
+                            height: MediaQuery.of(context).size.height * 0.4,
                             child: DraggableScrollbar.semicircle(
                               controller: _controller,
                               child: ListView.builder(
@@ -106,7 +106,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       return BlocBuilder<ColorCubit, ColorState>(
                         builder: (context, state) {
                           return SizedBox(
-                            height: 400,
+                            height: MediaQuery.of(context).size.height * 0.4,
                             child: ListView.builder(
                               itemBuilder: (_, __) {
                                 return ListTile(
@@ -166,7 +166,7 @@ class _NewHomePageState extends State<NewHomePage> {
       ),
       floatingActionButton: Scrollbar(
         child: Padding(
-          padding: EdgeInsets.only(left: 30),
+          padding: const EdgeInsets.only(left: 30),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
