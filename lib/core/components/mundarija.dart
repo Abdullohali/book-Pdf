@@ -97,11 +97,11 @@ List<List> mundarija = [
 ];
 
 List<List> ranglarim = [
-  [Colors.amber, "Желтый"],
-  [Colors.cyan, "Синий"],
-  [Colors.green, "Зеленый"],
-  [Colors.deepPurple, "Фиолетвый"],
-  [Colors.grey, "Серый"],
-  [Colors.black, "Черный"],
-  [Colors.pink, "Розовый"]
+  ['0xFFFFBF00', "Желтый"],
+  ['0xFF0000FF', "Синий"],
+  ['0xFF228c22', "Зеленый"],
+  ['0xFFA020F0', "Фиолетвый"],
+  ['0xFF808080', "Серый"],
+  ['0xFF000000', "Черный"],
+  ['0xFFFFC0CB', "Розовый"]
 ];

@@ -115,7 +115,8 @@ class _NewHomePageState extends State<NewHomePage> {
                                   ),
                                   trailing: CircleAvatar(
                                     radius: 15,
-                                    backgroundColor: ranglarim[__][0],
+                                    backgroundColor: Color(
+                                        int.parse(ranglarim[__][0].toString())),
                                   ),
                                   onTap: () async {
                                     context

@@ -23,6 +23,12 @@ class _TitleSceenState extends State<TitleSceen> {
   }
 
   @override
+  void deactivate() {
+    super.deactivate();
+  
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
